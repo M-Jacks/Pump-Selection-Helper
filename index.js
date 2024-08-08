@@ -1,78 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const pumpDataLibrary = [
-        {
-            pump: 'Surface Pump',
-            controller: 'CSD GD32',
-            performance: {
-                '1': 2968.46, '5': 2782.07, '10': 1689.35, '15': 809.31, '20': 101.03, '21': 0.0
-            }
-        },
-        {
-            pump: 'RM2C-KUBWA',
-            controller: 'CSD GD32',
-            performance: {
-                '1': 2622.95, '5': 2193.12, '10': 1953.34, '15': 1582.42, '20': 1035.97, '25': 733.65, '30':0
-            }
-        },
-        {
-            pump: 'RM2C-KUBWA',
-            controller: 'CSD AMT49406',
-            performance: {
-                '1': 2998.13, '5': 2405.21, '10': 2160.54, '15': 1474.35, '20': 804.83, '25': 234.43, '27': 0
-            }
-        },
-        {
-            pump: 'RM2C-KUBWA',
-            controller: 'CSD A4964',
-            performance: {
-                '1': 3339.52, '5': 3143.42, '10': 2699.66, '15': 2421.39, '20': 1854.0, '25': 1292.76, '30': 616.97, '35': 395.39, '39': 0
-            }
-        },
-        {
-            pump: 'RM2S PUMP',
-            controller: 'CSD GD32',
-            performance: {
-                '1': 1172.64, '10': 1028.64, '20': 864.5, '30': 713.93, '40': 569.24, '50': 732.94, '60': 199.19, '70': 0
-            }
-        },
-        {
-            pump: 'RM2S PUMP',
-            controller: 'CSD AMT49406',
-            performance: {
-                '1': 1256.33, '10': 1101.34, '20': 937.68, '30': 791.82, '40': 627.34, '50': 732.94, '60': 271.04, '70': 93.23, '71': 0
-            }
-        },
-        {
-            pump: 'RM2S PUMP',
-            controller: 'CSD A4964',
-            performance: {
-                '1': 1328.78, '10': 1159.98, '20': 1004.18, '30': 861.55, '40': 694.78, '50': 516.98, '60': 342.76, '70': 132.21, '70': 0
-            }
-        }
-    ];
-
+    const pumpData = JSON.parse(document.getElementById('pumpData').textContent);
     const pumpList = document.getElementById('pumpList');
-    
-    pumpDataLibrary.forEach(item => {
+    console.log(pumpData);
+
+    pumpData.forEach(item => {
         const listItem = document.createElement('li');
         listItem.textContent = `${item.pump} - ${item.controller}`;
         pumpList.appendChild(listItem);
     });
 
     const pumpForm = document.getElementById('pumpForm');
-    const resultsDiv = document.getElementById('results');
+    const bestPumpResults = document.getElementById('bestPumpResults');
+    const optionResults = document.getElementById('optionResults');
 
     pumpForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const head = parseFloat(document.getElementById('head').value);
-        const suggestions = rankPumps(pumpDataLibrary, head);
+        
+        if (isNaN(head)) {
+            alert('Please enter a valid number for the head.');
+            return;
+        }
 
-        resultsDiv.innerHTML = '';
-        suggestions.forEach(suggestion => {
-            const { pump, controller, flowRate } = suggestion;
-            const flowRateRange = `${flowRate - 50} L/h to ${flowRate + 50} L/h`;
-            resultsDiv.innerHTML += `<p><strong>${pump}</strong> with ${controller}: Expected Flow Rate ${flowRateRange}</p>`;
-        });
+        const suggestions = rankPumps(pumpData, head);
+
+        if (suggestions.length > 0) {
+            const bestPumpSection = document.getElementById('bestPump');
+            const optionSection = document.getElementById('option');
+
+            bestPumpResults.innerHTML = '';
+            optionResults.innerHTML = '';
+
+            if (suggestions.length > 0) {
+                const bestPump = suggestions[0];
+                const bestFlowRate = Math.round(bestPump.flowRate);
+                const bestRange = `${Math.max(0, Math.round(bestFlowRate - 30))} L/h to ${Math.round(bestFlowRate + 30)} L/h`;
+                bestPumpResults.innerHTML = `<p><strong>${bestPump.pump}</strong> with ${bestPump.controller}: Expected Flow Rate Range ${bestRange}</p>`;
+                bestPumpSection.style.display = 'block';
+            }
+
+            if (suggestions.length > 1) {
+                const option = suggestions[1];
+                const optionFlowRate = Math.round(option.flowRate);
+                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 30))} L/h to ${Math.round(optionFlowRate + 30)} L/h`;
+                optionResults.innerHTML = `<p><strong>${option.pump}</strong> with ${option.controller}: Expected Flow Rate Range ${optionRange}</p>`;
+                optionSection.style.display = 'block';
+            }
+        } else {
+            // When provided head is not in range
+            bestPumpResults.innerHTML = 'No suggestions available for the given head.';
+            optionResults.innerHTML = '';
+            document.getElementById('bestPump').style.display = 'block';
+        }
     });
 
     function interpolateFlowRate(performance, head) {
@@ -103,6 +82,3 @@ document.addEventListener('DOMContentLoaded', () => {
         return performances.slice(0, 2);
     }
 });
-
-// npm install -g http-server
-// http-server -p 8000

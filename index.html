@@ -1,29 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pump Selector</title>
     <link rel="stylesheet" href="styles.css">
     <script src="index.js" defer></script>
+
 </head>
+
 <body>
     <div class="container">
         <div class="side-panel">
-            <h2>Pump/Controller Combinations</h2>
+            <h2>Our Products</h2>
             <ul id="pumpList"></ul>
         </div>
         <div class="main-content">
-            <h1>Pump Performance Selector</h1>
+            <h1>SelectorXT</h1>
+            <p>To get the best suited pump for a customer, SelectorXT comes in handy to give you two options to choose from and each having the expected flow at the given head.</p>
             <form id="pumpForm">
-                <label for="head">Enter Pumping Head (m):</label>
-                <input type="number" id="head" name="head" required>
-                <button type="submit">Submit</button>
+                <label for="head">Provide the Pumping Head (m):</label>
+                <input type="number" id="head" name="head" step="any" required>
+                <button type="submit">Check</button>
             </form>
 
-            <h2>Best Pump/Controller Suggestions</h2>
-            <div id="results"></div>
+            <div id="bestPump" style="display: none;">
+                <h2>Best Option:</h2>
+                <div id="bestPumpResults"></div>
+            </div>
+
+            <div id="option" style="display: none;">
+                <h2>Second Option: </h2>
+                <div id="optionResults"></div>
+            </div>
         </div>
     </div>
+
+    <!-- pump data lib -->
+    <script type="application/json" id="pumpData">
+    [
+        {
+            "pump": "Surface Pump",
+            "controller": "CSD GD32",
+            "performance": {
+                "1": 2968.46,
+                "5": 2782.07,
+                "10": 1689.35,
+                "15": 809.31,
+                "20": 101.03,
+                "21": 0.0
+            }
+        },
+        {
+            "pump": "RM2C-KUBWA",
+            "controller": "CSD GD32",
+            "performance": {
+                "1": 2622.95,
+                "5": 2193.12,
+                "10": 1953.34,
+                "15": 1582.42,
+                "20": 1035.97,
+                "25": 733.65,
+                "30": 0
+            }
+        },
+        {
+            "pump": "RM2C-KUBWA",
+            "controller": "CSD AMT49406",
+            "performance": {
+                "1": 2998.13,
+                "5": 2405.21,
+                "10": 2160.54,
+                "15": 1474.35,
+                "20": 804.83,
+                "25": 234.43,
+                "27": 0
+            }
+        },
+        {
+            "pump": "RM2C-KUBWA",
+            "controller": "CSD A4964",
+            "performance": {
+                "1": 3339.52,
+                "5": 3143.42,
+                "10": 2699.66,
+                "15": 2421.39,
+                "20": 1854.0,
+                "25": 1292.76,
+                "30": 616.97,
+                "35": 395.39,
+                "39": 0
+            }
+        },
+        {
+            "pump": "RM2S PUMP",
+            "controller": "CSD GD32",
+            "performance": {
+                "1": 1172.64,
+                "10": 1028.64,
+                "20": 864.5,
+                "30": 713.93,
+                "40": 569.24,
+                "50": 732.94,
+                "60": 199.19,
+                "70": 0
+            }
+        },
+        {
+            "pump": "RM2S PUMP",
+            "controller": "CSD AMT49406",
+            "performance": {
+                "1": 1256.33,
+                "10": 1101.34,
+                "20": 937.68,
+                "30": 791.82,
+                "40": 627.34,
+                "50": 732.94,
+                "60": 271.04,
+                "70": 93.23,
+                "71": 0
+            }
+        },
+        {
+            "pump": "RM2S PUMP",
+            "controller": "CSD A4964",
+            "performance": {
+                "1": 1328.78,
+                "10": 1159.98,
+                "20": 1004.18,
+                "30": 861.55,
+                "40": 694.78,
+                "50": 516.98,
+                "60": 342.76,
+                "70": 132.21,
+                "71": 0
+            }
+        }
+    ]
+    </script>
 </body>
+
 </html>

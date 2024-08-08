@@ -1,22 +1,26 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
     display: flex;
     min-height: 100vh;
+    justify-content: center;
 }
 
 .container {
     display: flex;
+    max-width: 1500px;
     width: 100%;
+    padding-top: 50px;
+    padding: 100px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel {
     width: 25%;
-    background-color: #f4f4f4;
+    background-color: #25f3123d;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .side-panel h2 {
@@ -36,13 +40,20 @@ body {
 .main-content {
     width: 75%;
     padding: 20px;
+    background-color: rgba(0, 255, 255, 0.295);
 }
 
 h1 {
     font-size: 2em;
     margin-bottom: 20px;
 }
+p {
+    font-size: 2.25em;
+}
 
+li {
+    padding: 10px;
+}
 form {
     margin-bottom: 20px;
 }
@@ -56,8 +67,15 @@ input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #c0bcbc;
     border-radius: 4px;
+    -moz-appearance: textfield; /* Remove spinner on Firefox */
+    appearance: textfield; /* Remove spinner on modern browsers */
+}
+input::-webkit-inner-spin-button, 
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 button {
@@ -77,6 +95,29 @@ button:hover {
     margin-top: 20px;
     padding: 10px;
     background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+#pumpList, h2 {
+    padding: 40px;
+}
+#pumpList {
+    font-style: oblique;
+}
+
+#results {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+#bestPumpResults, #optionResults {
+    margin-bottom: 5px;
+}
+#bestPumpResults, #optionResults {
+    padding: 10px;
+    background-color: transparent;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
