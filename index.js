@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pumpForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const head = parseFloat(document.getElementById('head').value);
-        
+            
         if (isNaN(head)) {
             alert('Please enter a valid number for the head.');
             return;
