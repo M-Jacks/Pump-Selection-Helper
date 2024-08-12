@@ -4,6 +4,7 @@ body {
     display: flex;
     min-height: 100vh;
     justify-content: center;
+    background-color: rgb(0, 63, 82);
 }
 
 .container {
@@ -12,14 +13,12 @@ body {
     width: 100%;
     padding-top: 50px;
     padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     flex-direction: column;
+    color: antiquewhite;
 }
 
 .side-panel {
     width: 100%;
-    background-color: #25f3123d;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -27,7 +26,7 @@ body {
 .side-panel h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: darkblue;
+    color: antiquewhite;
 }
 
 .side-panel ul {
@@ -37,20 +36,19 @@ body {
 
 .side-panel li {
     margin-bottom: 10px;
-    color: darkblue;
+    color: antiquewhite;
 }
 
 .main-content {
     width: 100%;
     padding: 20px;
-    background-color: rgba(0, 255, 255, 0.295);
 }
 
 h1 {
     font-size: 2.6em;
     margin-bottom: 20px;
     font-weight: bolder;
-    color: darkblue;
+    color: antiquewhite;
 }
 
 h2 {
@@ -59,7 +57,7 @@ h2 {
 
 p {
     font-size: 1.8em;
-    color: #2d2d2e;
+    color: antiquewhite;
 }
 
 li {
@@ -78,8 +76,10 @@ label {
 input {
     width: 100%;
     padding: 8px;
+    background-color: rgba(174, 236, 236, 0.219);
     margin-bottom: 10px;
     border: 1px solid #c0bcbc;
+    color: antiquewhite;
     border-radius: 4px;
     -moz-appearance: textfield; /* Remove spinner on Firefox */
     appearance: textfield; /* Remove spinner on modern browsers */
@@ -93,23 +93,15 @@ input::-webkit-outer-spin-button {
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: greenyellow;
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-
-#results {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background-color: yellow;
 }
 
 #pumpList {
@@ -120,7 +112,7 @@ button:hover {
     margin-top: 20px;
     padding: 10px;
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd23;
     border-radius: 4px;
 }
 
