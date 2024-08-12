@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const pumpData = JSON.parse(document.getElementById('pumpData').textContent);
     const pumpList = document.getElementById('pumpList');
-    console.log(pumpData);
+    console.log("Product Library:", pumpData);
 
     pumpData.forEach(item => {
         const listItem = document.createElement('li');
@@ -16,13 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
     pumpForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const head = parseFloat(document.getElementById('head').value);
-            
+        
         if (isNaN(head)) {
             alert('Please enter a valid number for the head.');
             return;
         }
 
         const suggestions = rankPumps(pumpData, head);
+
+        console.log("Ranked suggestions:", suggestions);  // Logging final ranked suggestions
 
         if (suggestions.length > 0) {
             const bestPumpSection = document.getElementById('bestPump');
@@ -42,12 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (suggestions.length > 1) {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
-                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 25))} L/h to ${Math.round(optionFlowRate + 25)} L/h`;
+                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 30))} L/h to ${Math.round(optionFlowRate + 30)} L/h`;
                 optionResults.innerHTML = `<p><strong>${option.pump}</strong> with ${option.controller}: Expected Flow Rate Range ${optionRange}</p>`;
                 optionSection.style.display = 'block';
             }
         } else {
-            // When provided head is not in range
             bestPumpResults.innerHTML = 'No suggestions available for the given head.';
             optionResults.innerHTML = '';
             document.getElementById('bestPump').style.display = 'block';
@@ -72,13 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function rankPumps(data, head) {
+        // Calculate the flow rate for each pump at the given head value.
         const performances = data.map(entry => {
             const flowRate = interpolateFlowRate(entry.performance, head);
             return flowRate !== null ? { ...entry, flowRate } : null;
-        }).filter(entry => entry !== null);
+        });
 
-        performances.sort((a, b) => b.flowRate - a.flowRate);
+        console.log("After map operation:", performances);  
 
-        return performances.slice(0, 2);
+        const validPerformances = performances.filter(entry => entry !== null);
+
+        console.log("After filter operation:", validPerformances);  
+
+        validPerformances.sort((a, b) => b.flowRate - a.flowRate);
+
+        return validPerformances.slice(0, 2);
     }
 });
