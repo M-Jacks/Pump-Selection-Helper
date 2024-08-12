@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (suggestions.length > 1) {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
-                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 30))} L/h to ${Math.round(optionFlowRate + 30)} L/h`;
+                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 25))} L/h to ${Math.round(optionFlowRate + 25)} L/h`;
                 optionResults.innerHTML = `<p><strong>${option.pump}</strong> with ${option.controller}: Expected Flow Rate Range ${optionRange}</p>`;
                 optionSection.style.display = 'block';
             }
