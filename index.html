@@ -9,28 +9,23 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="index.js" defer></script>
-
 </head>
 
 <body>
     <div class="container">
         <div class="main-content">
-            <h1>SelectorXT</h1>
-            <h2>Not sure which pump is best suited for you?</h2>
-            <p>SelectorXT gives you two options to choose from, each having the expected flow at the given head.</p>
-            <form id="pumpForm">
+            <h1>PumpSelector Tool</h1>
+            <form id="pumpForm"> 
                 <label for="head">Provide the Pumping Head (m):</label>
                 <input type="number" id="head" name="head" step="any" required>
                 <button type="submit">Check</button>
             </form>
 
             <div id="bestPump" style="display: none;">
-                <h2>Best Option:</h2>
                 <div id="bestPumpResults"></div>
             </div>
 
             <div id="option" style="display: none;">
-                <h2>Second Option: </h2>
                 <div id="optionResults"></div>
             </div>
         </div>
@@ -42,7 +37,7 @@
 
     <!-- pump data lib -->
     <script type="application/json" id="pumpData">
-    [
+        [
         {
             "pump": "Surface Pump",
             "controller": "CSD GD32",
@@ -53,10 +48,11 @@
                 "15": 809.31,
                 "20": 101.03,
                 "21": 0.0
-            }
+            },
+            "url": "https://sunculture.io/surfacepump/"
         },
         {
-            "pump": "RM2C-KUBWA",
+            "pump": "rainmaker2c-kubwa",
             "controller": "CSD AMT49406",
             "performance": {
                 "1": 2998.13,
@@ -66,10 +62,11 @@
                 "20": 804.83,
                 "25": 234.43,
                 "27": 0
-            }
+            },
+            "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
         },
         {
-            "pump": "RM2S PUMP",
+            "pump": "climatesmart-direct",
             "controller": "CSD AMT49406",
             "performance": {
                 "1": 1256.33,
@@ -81,10 +78,11 @@
                 "60": 271.04,
                 "70": 93.23,
                 "71": 0
-            }
+            },
+            "url": "https://sunculture.io/products/climatesmart-direct/"
         },
         {
-            "pump": "RM2S-IC",
+            "pump": "rainmaker2-with-climatesmart-battery",
             "controller": "CSB1",
             "performance": {
                 "1": 1110,
@@ -99,7 +97,8 @@
                 "45": 240,
                 "50": 180,
                 "55": 0
-            }
+            },
+            "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
         }
     ]
     </script>

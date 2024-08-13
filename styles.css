@@ -4,6 +4,7 @@ body {
     display: flex;
     min-height: 100vh;
     justify-content: center;
+    align-items: center; 
     background-color: rgb(0, 63, 82);
 }
 
@@ -11,13 +12,16 @@ body {
     display: flex;
     max-width: 1200px;
     width: 100%;
-    padding-top: 50px;
     padding: 20px;
     flex-direction: column;
     color: antiquewhite;
+    align-items: center; 
 }
 
 .side-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     width: 100%;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -27,11 +31,14 @@ body {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: antiquewhite;
+    text-align: center; 
 }
 
 .side-panel ul {
     list-style: none;
     padding: 0;
+    text-align: center; 
+    width: 100%;
 }
 
 .side-panel li {
@@ -40,8 +47,13 @@ body {
 }
 
 .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     width: 100%;
     padding: 20px;
+    text-align: center; 
+    max-width: 800px; 
 }
 
 h1 {
@@ -75,6 +87,7 @@ label {
 
 input {
     width: 100%;
+    max-width: 300px; 
     padding: 8px;
     background-color: rgba(174, 236, 236, 0.219);
     margin-bottom: 10px;
@@ -108,23 +121,10 @@ button:hover {
     font-style: oblique;
 }
 
-#results {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: transparent;
-    border: 1px solid #dddddd23;
-    border-radius: 4px;
-}
+#bestPump, #option {
+    background-color: rgb(4, 252, 252);
+} 
 
-#bestPumpResults, #optionResults {
-    margin-bottom: 5px;
-    padding: 10px;
-    background-color: transparent;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
