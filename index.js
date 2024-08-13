@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pumpData.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.pump} - ${item.controller}`;
+        listItem.textContent = `${item.pump}`;
         pumpList.appendChild(listItem);
     });
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (suggestions.length > 0) {
                 const bestPump = suggestions[0];
                 const bestFlowRate = Math.round(bestPump.flowRate);
-                const bestRange = `${Math.max(0, Math.round(bestFlowRate - 30))} L/h to ${Math.round(bestFlowRate + 30)} L/h`;
+                const bestRange = `${Math.max(0, Math.round(bestFlowRate - 10))} L/h to ${Math.round(bestFlowRate + 10)} L/h`;
                 bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block; padding:10px; border:1px solid #ddd; margin-bottom:10px; text-decoration:none; color:black;"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
                 bestPumpSection.style.display = 'block';
             }
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (suggestions.length > 1) {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
-                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 30))} L/h to ${Math.round(optionFlowRate + 30)} L/h`;
+                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 10))} L/h to ${Math.round(optionFlowRate + 10)} L/h`;
                 optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; border:1px solid #ddd; margin-bottom:10px; text-decoration:none; color:black;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
                 optionSection.style.display = 'block';
             }
