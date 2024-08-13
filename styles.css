@@ -59,14 +59,18 @@ body {
     display: flex;
     flex-direction: column;
     width: 800px;
-    border-radius: 2px;
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px); /* Safari support */
-    padding: 20px; 
+    padding: 0px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-
+#bestPump, #option {
+    border-radius: 2px;
+}
+#bestPump:hover, #option:hover {
+    background-color: rgb(14, 75, 94);
+}
 #bestPumpResults a, #optionResults a{
     background-color: transparent; 
     border: none; 
