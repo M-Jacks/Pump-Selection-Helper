@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
     justify-content: center;
     align-items: center; 
-    background-color: rgb(0, 63, 82);
+    background-color: rgb(228, 243, 228);
 }
 
 .container {
@@ -14,7 +14,7 @@ body {
     width: 100%;
     padding: 20px;
     flex-direction: column;
-    color: antiquewhite;
+    color: black;
     align-items: center; 
 }
 
@@ -30,7 +30,7 @@ body {
 .side-panel h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: antiquewhite;
+    color: rgb(1, 70, 75);
     text-align: center; 
 }
 
@@ -43,7 +43,7 @@ body {
 
 .side-panel li {
     margin-bottom: 10px;
-    color: antiquewhite;
+    color: black;
 }
 
 .main-content {
@@ -69,12 +69,12 @@ body {
     border-radius: 2px;
 }
 #bestPump:hover, #option:hover {
-    background-color: rgb(14, 75, 94);
+    background-color: yellow;
 }
 #bestPumpResults a, #optionResults a{
     background-color: transparent; 
     border: none; 
-    color: antiquewhite; 
+    color: black; 
     display: block;
     padding: 10px;
     margin-bottom: 10px;
@@ -85,16 +85,20 @@ h1 {
     font-size: 2.0em;
     margin-bottom: 20px;
     font-weight: bolder;
-    color: antiquewhite;
+    color: rgb(2, 189, 189);
 }
 
 h2 {
     font-size: 2.25em;
 }
 
+#label {
+    color: green;
+}
+
 p {
     font-size: 1.8em;
-    color: antiquewhite;
+    color: black;
 }
 
 li {
@@ -117,7 +121,7 @@ input {
     background-color: rgba(174, 236, 236, 0.219);
     margin-bottom: 10px;
     border: 1px solid #c0bcbc;
-    color: antiquewhite;
+    color: black;
     border-radius: 4px;
     -moz-appearance: textfield; /* Remove spinner on Firefox */
     appearance: textfield; /* Remove spinner on modern browsers */

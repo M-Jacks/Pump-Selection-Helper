@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bestPump = suggestions[0];
                 const bestFlowRate = Math.round(bestPump.flowRate);
                 const bestRange = `${Math.max(0, Math.round(bestFlowRate - 10))} L/h to ${Math.round(bestFlowRate + 10)} L/h`;
-                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block, background-color: transparent; padding:10px; margin-bottom:10px; text-decoration:none; color:antiquewhite;"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
+                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block, background-color: transparent; padding:10px; margin-bottom:10px; text-decoration:none; color:black;"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
                 bestPumpSection.style.display = 'block';
             }
         
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
                 const optionRange = `${Math.max(0, Math.round(optionFlowRate - 10))} L/h to ${Math.round(optionFlowRate + 10)} L/h`;
-                optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; margin-bottom:10px; text-decoration:none; color:antiquewhite; background-color: transparent;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
+                optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; margin-bottom:10px; text-decoration:none; color:black; background-color: transparent;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
                 optionSection.style.display = 'block';
             }
         }else {
