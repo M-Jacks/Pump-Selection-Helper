@@ -15,18 +15,19 @@
     <div class="container">
         <div class="main-content">
             <h1>Pump Recommendation Tool</h1>
-            <form id="pumpForm"> 
+            <form id="pumpForm">
                 <label for="head">Provide the Pumping Head (m):</label>
                 <input type="number" id="head" name="head" step="any" required>
                 <button type="submit">Check</button>
             </form>
+            <div class="results">
+                <div id="bestPump" style="display: none;">
+                    <div id="bestPumpResults"></div>
+                </div>
 
-            <div id="bestPump" style="display: none;">
-                <div id="bestPumpResults"></div>
-            </div>
-
-            <div id="option" style="display: none;">
-                <div id="optionResults"></div>
+                <div id="option" style="display: none;">
+                    <div id="optionResults"></div>
+                </div>
             </div>
         </div>
         <div class="side-panel">
@@ -52,7 +53,7 @@
             "url": "https://sunculture.io/surfacepump/"
         },
         {
-            "pump": "RainMaker2c-kubwa",
+            "pump": "RainMaker2C Kubwa",
             "controller": "CSD AMT49406",
             "performance": {
                 "1": 2998.13,
@@ -66,7 +67,7 @@
             "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
         },
         {
-            "pump": "climatesmart-Direct",
+            "pump": "ClimateSmart™ Direct",
             "controller": "CSD AMT49406",
             "performance": {
                 "1": 1256.33,
@@ -82,7 +83,7 @@
             "url": "https://sunculture.io/products/climatesmart-direct/"
         },
         {
-            "pump": "RainMaker2-with-climatesmart-battery",
+            "pump": "RainMaker2 with ClimateSmart™ Battery",
             "controller": "CSB1",
             "performance": {
                 "1": 1110,

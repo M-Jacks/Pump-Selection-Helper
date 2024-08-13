@@ -29,26 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if (suggestions.length > 0) {
             const bestPumpSection = document.getElementById('bestPump');
             const optionSection = document.getElementById('option');
-
+        
             bestPumpResults.innerHTML = '';
             optionResults.innerHTML = '';
-
+        
             if (suggestions.length > 0) {
                 const bestPump = suggestions[0];
                 const bestFlowRate = Math.round(bestPump.flowRate);
                 const bestRange = `${Math.max(0, Math.round(bestFlowRate - 10))} L/h to ${Math.round(bestFlowRate + 10)} L/h`;
-                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block; padding:10px; border:1px solid #ddd; margin-bottom:10px; text-decoration:none; color:black;"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
+                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block, background-color: transparent; padding:10px; margin-bottom:10px; text-decoration:none; color:antiquewhite;"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
                 bestPumpSection.style.display = 'block';
             }
-
+        
             if (suggestions.length > 1) {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
                 const optionRange = `${Math.max(0, Math.round(optionFlowRate - 10))} L/h to ${Math.round(optionFlowRate + 10)} L/h`;
-                optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; border:1px solid #ddd; margin-bottom:10px; text-decoration:none; color:black;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
+                optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; margin-bottom:10px; text-decoration:none; color:antiquewhite; background-color: transparent;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
                 optionSection.style.display = 'block';
             }
-        } else {
+        }else {
             bestPumpResults.innerHTML = 'No suggestions available for the given head.';
             optionResults.innerHTML = '';
             document.getElementById('bestPump').style.display = 'block';

@@ -55,6 +55,27 @@ body {
     text-align: center; 
     max-width: 800px; 
 }
+.results {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    border-radius: 2px;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    padding: 20px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+
+#bestPumpResults a, #optionResults a{
+    background-color: transparent; 
+    border: none; 
+    color: antiquewhite; 
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
 
 h1 {
     font-size: 2.0em;
@@ -121,9 +142,7 @@ button:hover {
     font-style: oblique;
 }
 
-#bestPump, #option {
-    background-color: rgb(4, 252, 252);
-} 
+
 
 @media (max-width: 768px) {
     .container {
