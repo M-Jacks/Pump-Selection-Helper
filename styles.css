@@ -69,7 +69,8 @@ body {
     border-radius: 2px;
 }
 #bestPump:hover, #option:hover {
-    background-color: yellow;
+    background-color: green;
+    color: white;
 }
 #bestPumpResults a, #optionResults a{
     background-color: transparent; 
@@ -93,7 +94,7 @@ h2 {
 }
 
 #label {
-    color: green;
+    color: rgb(6, 252, 6);
 }
 
 p {
@@ -143,7 +144,8 @@ button {
 }
 
 button:hover {
-    background-color: yellow;
+    background-color: green;
+    color: white;
 }
 
 #pumpList {
