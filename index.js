@@ -37,7 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bestPump = suggestions[0];
                 const bestFlowRate = Math.round(bestPump.flowRate);
                 const bestRange = `${Math.max(0, Math.round(bestFlowRate - 10))} L/h to ${Math.round(bestFlowRate + 10)} L/h`;
-                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" style="display:block, background-color: transparent; padding:10px; margin-bottom:10px; text-decoration:none; color:rgba(0, 0, 0, 0.678);"><strong>1. ${bestPump.pump}:</strong> ${bestRange}</a>`;
+                firstOption.innerHTML = 'Best Option';
+                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" class="pump-link"><strong> ${bestPump.pump}:</strong> ${bestRange}</a>`;
+                bestPumpResults.setAttribute('data-toggle', 'tooltip');
+                bestPumpResults.setAttribute('data-placement', 'top');
+                bestPumpResults.setAttribute('title', 'Click to see Specs');
                 bestPumpSection.style.display = 'block';
             }
         
@@ -45,12 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const option = suggestions[1];
                 const optionFlowRate = Math.round(option.flowRate);
                 const optionRange = `${Math.max(0, Math.round(optionFlowRate - 10))} L/h to ${Math.round(optionFlowRate + 10)} L/h`;
-                optionResults.innerHTML = `<a href="${option.url}" target="_blank" style="display:block; padding:10px; margin-bottom:10px; text-decoration:none; color:rgba(0, 0, 0, 0.678); background-color: transparent;"><strong>2. ${option.pump}:</strong> ${optionRange}</a>`;
+                secondOption.innerHTML = 'Best Alternative';
+                optionResults.innerHTML = `<a href="${option.url}" target="_blank" class="pump-link"><strong> ${option.pump}:</strong> ${optionRange}</a>`;
+                optionResults.setAttribute('data-toggle', 'tooltip');
+                optionResults.setAttribute('data-placement', 'top');
+                optionResults.setAttribute('title', 'Click to see Specs');
                 optionSection.style.display = 'block';
             }
-        }else {
+        } else {
             bestPumpResults.innerHTML = 'No suggestions available for the given head.';
             optionResults.innerHTML = '';
+            secondOption.innerHTML = '';
             document.getElementById('bestPump').style.display = 'block';
         }
     });

@@ -12,27 +12,36 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="main-content">
-            <h1>Pump Recommendation Tool</h1>
-            <form id="pumpForm">
-                <label id="label" for="head">Provide the Pumping Head (m):</label>
-                <input type="number" id="head" name="head" step="any" required>
-                <button type="submit">Check Expected Flow</button>
-            </form>
-            <div class="results">
-                <div id="bestPump" style="display: none;">
-                    <div id="bestPumpResults"></div>
-                </div>
+    <button id="selectorButton">Select Your Pump Now!</button>
 
-                <div id="option" style="display: none;">
-                    <div id="optionResults"></div>
+    <div id="pumpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container">
+                <div class="main-content">
+                    <h1>Pump Recommendation Tool</h1>
+                    <form id="pumpForm">
+                        <label id="label" for="head">Provide the Pumping Head (m):</label>
+                        <input type="number" id="head" name="head" step="any" required>
+                        <button type="submit">Find Pump & Flowrate</button>
+                    </form>
+                    <div class="results">
+                        <div class="option" id="bestPump" style="display: none;">
+                            <div id="firstOption"></div>
+                            <div id="bestPumpResults"></div>
+                        </div>
+
+                        <div class="option" id="option" style="display: none;">
+                            <div id="secondOption"></div>
+                            <div id="optionResults"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="side-panel">
+                    <h2>Our Products</h2>
+                    <ul id="pumpList"></ul>
                 </div>
             </div>
-        </div>
-        <div class="side-panel">
-            <h2>Our Products</h2>
-            <ul id="pumpList"></ul>
         </div>
     </div>
 
@@ -102,6 +111,26 @@
             "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
         }
     ]
+    </script>
+
+    <script>
+        const modal = document.getElementById('pumpModal');
+        const btn = document.getElementById('selectorButton');
+        const span = document.getElementsByClassName('close')[0];
+
+        btn.onclick = function () {
+            modal.style.display = 'block';
+        }
+
+        span.onclick = function () {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 
