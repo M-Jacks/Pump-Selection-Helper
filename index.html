@@ -48,88 +48,110 @@
     <!-- pump data lib -->
     <script type="application/json" id="pumpData">
         [
-        {
-            "pump": "Surface Pump",
-            "controller": "CSD GD32",
-            "performance": {
-                "1": 2968.46,
-                "5": 2782.07,
-                "10": 1689.35,
-                "15": 809.31,
-                "20": 101.03,
-                "21": 0.0
+            {
+                "pump": "Surface Pump",
+                "controller": "CSD GD32",
+                "performance": {
+                    "1": 2968.46,
+                    "5": 2782.07,
+                    "10": 1689.35,
+                    "15": 809.31,
+                    "20": 101.03,
+                    "21": 0.0
+                },
+                "url": "https://sunculture.io/surfacepump/"
             },
-            "url": "https://sunculture.io/surfacepump/"
-        },
-        {
-            "pump": "RainMaker2C Kubwa",
-            "controller": "CSD AMT49406",
-            "performance": {
-                "1": 2998.13,
-                "5": 2405.21,
-                "10": 2160.54,
-                "15": 1474.35,
-                "20": 804.83,
-                "25": 234.43,
-                "27": 0
+            {
+                "pump": "RainMaker2C Kubwa",
+                "controller": "CSD AMT49406",
+                "performance": {
+                    "1": 2998.13,
+                    "5": 2405.21,
+                    "10": 2160.54,
+                    "15": 1474.35,
+                    "20": 804.83,
+                    "25": 234.43,
+                    "27": 0
+                },
+                "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
             },
-            "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
-        },
-        {
-            "pump": "ClimateSmart™ Direct",
-            "controller": "CSD AMT49406",
-            "performance": {
-                "1": 1256.33,
-                "10": 1101.34,
-                "20": 937.68,
-                "30": 791.82,
-                "40": 627.34,
-                "50": 732.94,
-                "60": 271.04,
-                "70": 93.23,
-                "71": 0
+            {
+                "pump": "ClimateSmart™ Direct",
+                "controller": "CSD AMT49406",
+                "performance": {
+                    "1": 1256.33,
+                    "10": 1101.34,
+                    "20": 937.68,
+                    "30": 791.82,
+                    "40": 627.34,
+                    "50": 732.94,
+                    "60": 271.04,
+                    "70": 93.23,
+                    "71": 0
+                },
+                "url": "https://sunculture.io/products/climatesmart-direct/"
             },
-            "url": "https://sunculture.io/products/climatesmart-direct/"
-        },
-        {
-            "pump": "RainMaker2 with ClimateSmart™ Battery",
-            "controller": "CSB1",
-            "performance": {
-                "1": 1110,
-                "5": 990,
-                "10": 852,
-                "15": 744,
-                "20": 612,
-                "25": 540,
-                "30": 462,
-                "35": 390,
-                "40": 300,
-                "45": 240,
-                "50": 180,
-                "55": 0
-            },
-            "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
-        }
-    ]
+            {
+                "pump": "RainMaker2 with ClimateSmart™ Battery",
+                "controller": "CSB1",
+                "performance": {
+                    "1": 1110,
+                    "5": 990,
+                    "10": 852,
+                    "15": 744,
+                    "20": 612,
+                    "25": 540,
+                    "30": 462,
+                    "35": 390,
+                    "40": 300,
+                    "45": 240,
+                    "50": 180,
+                    "55": 0
+                },
+                "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
+            }
+        ]
     </script>
 
     <script>
         const modal = document.getElementById('pumpModal');
         const btn = document.getElementById('selectorButton');
         const span = document.getElementsByClassName('close')[0];
+        const pumpForm = document.getElementById('pumpForm');
+        const bestPump = document.getElementById('bestPump');
+        const option = document.getElementById('option');
+        const firstOption = document.getElementById('firstOption');
+        const bestPumpResults = document.getElementById('bestPumpResults');
+        const secondOption = document.getElementById('secondOption');
+        const optionResults = document.getElementById('optionResults');
 
         btn.onclick = function () {
             modal.style.display = 'block';
         }
 
         span.onclick = function () {
-            modal.style.display = 'none';
+            closeModal();
         }
 
         window.onclick = function (event) {
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            clearModalContent();
+        }
+
+        function clearModalContent() {
+            pumpForm.reset();
+            bestPump.style.display = 'none';
+            option.style.display = 'none';
+            firstOption.innerHTML = '';
+            bestPumpResults.innerHTML = '';
+            secondOption.innerHTML = '';
+            optionResults.innerHTML = '';
         }
     </script>
 </body>

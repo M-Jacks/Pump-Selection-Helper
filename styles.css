@@ -230,8 +230,8 @@ button:hover {
     display: block;
     width: 250px;
     position: fixed;
-    bottom: 20px; 
-    right: 20px; 
+    bottom: 30%; 
+    right: 20%; 
     padding: 15px;
     background: linear-gradient(270deg, cyan, green, yellow);
     background-size: 1000% 1000%; /* To control the speed and overlap */
