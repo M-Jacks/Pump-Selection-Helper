@@ -1,68 +1,200 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const pumpData = JSON.parse(document.getElementById('pumpData').textContent);
     const pumpList = document.getElementById('pumpList');
-    console.log("Product Library:", pumpData);
+    const bestPumpResultsDiv = document.getElementById('bestPumpResults');
+    const optionResultsDiv = document.getElementById('optionResults');
 
-    pumpData.forEach(item => {
+    const categorySelect = document.getElementById('category');
+    const subcategorySelect = document.getElementById('subcategory');
+    const headInput = document.getElementById('head');
+
+    const pumpDataLibrary = [
+        {
+            "pump": "Surface Pump",
+            "controller": "CSD GD32",
+            "category": "surface",
+            "subcategory": "smart_direct",
+            "performance": {
+                "1": 2968.46,
+                "5": 2782.07,
+                "10": 1689.35,
+                "15": 809.31,
+                "20": 101.03,
+                "21": 0.0
+            },
+            "url": "https://sunculture.io/surfacepump/"
+        }, {
+            "pump": "Surface Pump",
+            "controller": "FAlcon",
+            "category": "surface",
+            "subcategory": "smart_direct",
+            "performance": {
+                "1": 2968.46,
+                "5": 2782.07,
+                "10": 1689.35,
+                "15": 809.31,
+                "20": 101.03,
+                "21": 0.0
+            },
+            "url": "https://sunculture.io/surfacepump/"
+        }, {
+            "pump": "RM2C-MAX Pump",
+            "controller": "CSD GD32",
+            "category": "submersible",
+            "subcategory": "smart_direct",
+            "performance": {
+                "1": 2968.46,
+                "5": 2782.07,
+                "10": 1689.35,
+                "15": 809.31,
+                "20": 101.03,
+                "21": 0.0
+            },
+            "url": "https://sunculture.io/surfacepump/"
+        },
+        {
+            "pump": "RainMaker2C Kubwa",
+            "controller": "CSD AMT49406",
+            "category": "surface",
+            "subcategory": "smart_direct",
+            "performance": {
+                "1": 2998.13,
+                "5": 2405.21,
+                "10": 2160.54,
+                "15": 1474.35,
+                "20": 804.83,
+                "25": 234.43,
+                "27": 0
+            },
+            "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
+        },
+        {
+            "pump": "ClimateSmart™ Direct",
+            "controller": "CSD AMT49406",
+            "category": "submersible",
+            "subcategory": "smart_direct",
+            "performance": {
+                "1": 1256.33,
+                "10": 1101.34,
+                "20": 937.68,
+                "30": 791.82,
+                "40": 627.34,
+                "50": 732.94,
+                "60": 271.04,
+                "70": 93.23,
+                "71": 0
+            },
+            "url": "https://sunculture.io/products/climatesmart-direct/"
+        },
+        {
+            "pump": "RainMaker2 with ClimateSmart™ Battery",
+            "controller": "CSB1",
+            "category": "submersible",
+            "subcategory": "smart_battery",
+            "performance": {
+                "1": 1110,
+                "5": 990,
+                "10": 852,
+                "15": 744,
+                "20": 612,
+                "25": 540,
+                "30": 462,
+                "35": 390,
+                "40": 300,
+                "45": 240,
+                "50": 180,
+                "55": 0
+            },
+            "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
+        }
+    ];
+
+    // Tooltip 
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.innerText = 'View specs';
+    document.body.appendChild(tooltip);
+
+    pumpDataLibrary.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.pump}`;
+        listItem.textContent = `${item.pump} - ${item.controller}`;
         pumpList.appendChild(listItem);
     });
 
-    const pumpForm = document.getElementById('pumpForm');
-    const bestPumpResults = document.getElementById('bestPumpResults');
-    const optionResults = document.getElementById('optionResults');
+    // Initialize filter event listeners
+    headInput.addEventListener('input', handleInputChange);
+    categorySelect.addEventListener('change', handleInputChange);
+    subcategorySelect.addEventListener('change', handleInputChange);
 
-    pumpForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const head = parseFloat(document.getElementById('head').value);
+    function handleInputChange() {
+        const head = parseFloat(headInput.value);
+        const selectedCategory = categorySelect.value;
+        const selectedSubcategory = subcategorySelect.value;
 
-        if (isNaN(head)) {
-            alert('Please enter a valid number for the head.');
+        // Filter based on category/subcategory
+        const filteredPumps = filterPumpsByCategory(pumpDataLibrary, selectedCategory, selectedSubcategory);
+
+        // If head is provided, rank the pumps and display results
+        if (!isNaN(head)) {
+            const suggestions = rankPumps(filteredPumps, head);
+            clearResults(); 
+            displayResults(suggestions);
+        } else {
+            // If head is not provided, just filter the list but don't display results
+            clearResults(); 
+        }
+    }
+
+    function clearResults() {
+        bestPumpResultsDiv.innerHTML = 'Provide pumping head to get pump suggestion.';
+        optionResultsDiv.innerHTML = '';
+    }
+
+    function displayResults(suggestions) {
+        if (suggestions.length === 0) {
+            bestPumpResultsDiv.innerHTML = '<p>No available suggestion.</p>';
+            optionResultsDiv.innerHTML = 'No available option';
             return;
         }
 
-        const suggestions = rankPumps(pumpData, head);
-
-        console.log("Ranked suggestions:", suggestions);
-
+        // Display best pump
         if (suggestions.length > 0) {
-            const bestPumpSection = document.getElementById('bestPump');
-            const optionSection = document.getElementById('option');
-        
-            bestPumpResults.innerHTML = '';
-            optionResults.innerHTML = '';
-        
-            if (suggestions.length > 0) {
-                const bestPump = suggestions[0];
-                const bestFlowRate = Math.round(bestPump.flowRate);
-                const bestRange = `${Math.max(0, Math.round(bestFlowRate - 10))} L/h to ${Math.round(bestFlowRate + 10)} L/h`;
-                firstOption.innerHTML = 'Best Option';
-                bestPumpResults.innerHTML = `<a href="${bestPump.url}" target="_blank" class="pump-link"><strong> ${bestPump.pump}:</strong> ${bestRange}</a>`;
-                bestPumpResults.setAttribute('data-toggle', 'tooltip');
-                bestPumpResults.setAttribute('data-placement', 'top');
-                bestPumpResults.setAttribute('title', 'Click to see Specs');
-                bestPumpSection.style.display = 'block';
-            }
-        
-            if (suggestions.length > 1) {
-                const option = suggestions[1];
-                const optionFlowRate = Math.round(option.flowRate);
-                const optionRange = `${Math.max(0, Math.round(optionFlowRate - 10))} L/h to ${Math.round(optionFlowRate + 10)} L/h`;
-                secondOption.innerHTML = 'Best Alternative';
-                optionResults.innerHTML = `<a href="${option.url}" target="_blank" class="pump-link"><strong> ${option.pump}:</strong> ${optionRange}</a>`;
-                optionResults.setAttribute('data-toggle', 'tooltip');
-                optionResults.setAttribute('data-placement', 'top');
-                optionResults.setAttribute('title', 'Click to see Specs');
-                optionSection.style.display = 'block';
-            }
-        } else {
-            bestPumpResults.innerHTML = 'No suggestions available for the given head.';
-            optionResults.innerHTML = '';
-            secondOption.innerHTML = '';
-            document.getElementById('bestPump').style.display = 'block';
+            const bestPump = suggestions[0]; 
+            bestPumpResultsDiv.innerHTML = createPumpLink(bestPump);
         }
-    });
+
+        // Display second best pump as an option
+        if (suggestions.length > 1) {
+            const option = suggestions[1]; 
+            optionResultsDiv.innerHTML = createPumpLink(option);
+        }
+    }
+
+    function createPumpLink(pump) {
+        return `<a href="${pump.url}" target="_blank" class="pump-link">
+                    <strong>${pump.pump}</strong> with ${pump.controller}: Expected Flow Rate ${pump.flowRate.toFixed(2)} L/h
+                </a>`;
+    }
+
+    function rankPumps(filteredData, head) {
+        const performances = filteredData.map(entry => {
+            const flowRate = interpolateFlowRate(entry.performance, head);
+            return flowRate !== null ? { ...entry, flowRate } : null;
+        }).filter(entry => entry !== null); // Filter out pumps where flow rate couldn't be interpolated
+
+        // Sort pumps by flow rate in descending order
+        performances.sort((a, b) => b.flowRate - a.flowRate);
+
+        return performances;
+    }
+
+    function filterPumpsByCategory(data, category, subcategory) {
+        // Filter pumps by category and subcategory if provided
+        return data.filter(pump => {
+            const categoryMatch = !category || pump.category === category;
+            const subcategoryMatch = !subcategory || pump.subcategory === subcategory;
+            return categoryMatch && subcategoryMatch;
+        });
+    }
 
     function interpolateFlowRate(performance, head) {
         const heads = Object.keys(performance).map(h => parseFloat(h)).sort((a, b) => a - b);
@@ -77,24 +209,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return flowRate;
             }
         }
-
         return null;
     }
 
-    function rankPumps(data, head) {
-        const performances = data.map(entry => {
-            const flowRate = interpolateFlowRate(entry.performance, head);
-            return flowRate !== null ? { ...entry, flowRate } : null;
+    // Tooltip hover logic
+    document.addEventListener('mousemove', (e) => {
+        const pumpLinks = document.querySelectorAll('.pump-link');
+        pumpLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                tooltip.style.display = 'block';
+            });
+
+            link.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
         });
 
-        console.log("After map operation:", performances);
-
-        const validPerformances = performances.filter(entry => entry !== null);
-
-        console.log("After filter operation:", validPerformances);
-
-        validPerformances.sort((a, b) => b.flowRate - a.flowRate);
-
-        return validPerformances.slice(0, 2);
-    }
+        // Position the tooltip near the mouse cursor
+        tooltip.style.left = `${e.pageX + 15}px`;
+        tooltip.style.top = `${e.pageY + 15}px`;
+    });
 });

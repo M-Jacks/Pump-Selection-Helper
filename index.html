@@ -1,159 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pump Selector</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="index.js" defer></script>
 </head>
-
 <body>
-    <button id="selectorButton">Select Your Pump Now!</button>
+    <div class="container">
+        <div class="main-content">
+            <h1>SunCulture Pump Selection helper</h1>
+            
+            <label for="category">Select Category:</label>
+            <select id="category" name="category">
+                <option value="">Choose Category</option>
+                <option value="surface">Surface Pump Type</option>
+                <option value="submersible">Submersible Pump Type</option>
+            </select>
 
-    <div id="pumpModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="container">
-                <div class="main-content">
-                    <h1>Pump Recommendation Tool</h1>
-                    <form id="pumpForm">
-                        <label id="label" for="head">Provide the Pumping Head (m):</label>
-                        <input type="number" id="head" name="head" step="any" required>
-                        <button type="submit">Find Pump & Flowrate</button>
-                    </form>
-                    <div class="results">
-                        <div class="option" id="bestPump" style="display: none;">
-                            <div id="firstOption"></div>
-                            <div id="bestPumpResults"></div>
-                        </div>
+            <label for="subcategory">Select Subcategory:</label>
+            <select id="subcategory" name="subcategory">
+                <option value="">Choose Subcategory</option>
+                <option value="smart_direct">Smart Direct</option>
+                <option value="smart_battery">Smart Battery</option>
+            </select>
 
-                        <div class="option" id="option" style="display: none;">
-                            <div id="secondOption"></div>
-                            <div id="optionResults"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="side-panel">
-                    <h2>Our Products</h2>
-                    <ul id="pumpList"></ul>
-                </div>
+            <label for="head">Enter Pumping Head (m):</label>
+            <input type="number" id="head" name="head" required>
+
+            <div class="section" id="bestPump">
+                <h2>Best Pump Suggestion</h2>
+                <div id="bestPumpResults">Please enter a head value to see the best pump suggestion.</div>
+            </div>
+
+            <div class="section" id="option">
+                <h2>An Option</h2>
+                <div id="optionResults">Please enter a head value to see an option.</div>
             </div>
         </div>
+        <div class="side-panel">
+            <h2>Our Products</h2>
+            <ul id="pumpList"></ul>
+        </div>
     </div>
-
-    <!-- pump data lib -->
-    <script type="application/json" id="pumpData">
-        [
-            {
-                "pump": "Surface Pump",
-                "controller": "CSD GD32",
-                "performance": {
-                    "1": 2968.46,
-                    "5": 2782.07,
-                    "10": 1689.35,
-                    "15": 809.31,
-                    "20": 101.03,
-                    "21": 0.0
-                },
-                "url": "https://sunculture.io/surfacepump/"
-            },
-            {
-                "pump": "RainMaker2C Kubwa",
-                "controller": "CSD AMT49406",
-                "performance": {
-                    "1": 2998.13,
-                    "5": 2405.21,
-                    "10": 2160.54,
-                    "15": 1474.35,
-                    "20": 804.83,
-                    "25": 234.43,
-                    "27": 0
-                },
-                "url": "https://sunculture.io/products/rainmaker2c-kubwa/"
-            },
-            {
-                "pump": "ClimateSmart™ Direct",
-                "controller": "CSD AMT49406",
-                "performance": {
-                    "1": 1256.33,
-                    "10": 1101.34,
-                    "20": 937.68,
-                    "30": 791.82,
-                    "40": 627.34,
-                    "50": 732.94,
-                    "60": 271.04,
-                    "70": 93.23,
-                    "71": 0
-                },
-                "url": "https://sunculture.io/products/climatesmart-direct/"
-            },
-            {
-                "pump": "RainMaker2 with ClimateSmart™ Battery",
-                "controller": "CSB1",
-                "performance": {
-                    "1": 1110,
-                    "5": 990,
-                    "10": 852,
-                    "15": 744,
-                    "20": 612,
-                    "25": 540,
-                    "30": 462,
-                    "35": 390,
-                    "40": 300,
-                    "45": 240,
-                    "50": 180,
-                    "55": 0
-                },
-                "url": "https://sunculture.io/products/rainmaker2-with-climatesmart-battery/"
-            }
-        ]
-    </script>
-
-    <script>
-        const modal = document.getElementById('pumpModal');
-        const btn = document.getElementById('selectorButton');
-        const span = document.getElementsByClassName('close')[0];
-        const pumpForm = document.getElementById('pumpForm');
-        const bestPump = document.getElementById('bestPump');
-        const option = document.getElementById('option');
-        const firstOption = document.getElementById('firstOption');
-        const bestPumpResults = document.getElementById('bestPumpResults');
-        const secondOption = document.getElementById('secondOption');
-        const optionResults = document.getElementById('optionResults');
-
-        btn.onclick = function () {
-            modal.style.display = 'block';
-        }
-
-        span.onclick = function () {
-            closeModal();
-        }
-
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        function closeModal() {
-            modal.style.display = 'none';
-            clearModalContent();
-        }
-
-        function clearModalContent() {
-            pumpForm.reset();
-            bestPump.style.display = 'none';
-            option.style.display = 'none';
-            firstOption.innerHTML = '';
-            bestPumpResults.innerHTML = '';
-            secondOption.innerHTML = '';
-            optionResults.innerHTML = '';
-        }
-    </script>
 </body>
-
 </html>
