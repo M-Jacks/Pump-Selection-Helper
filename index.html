@@ -8,40 +8,49 @@
     <script src="index.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="main-content">
-            <h1>SunCulture Pump Selection helper</h1>
-            
-            <label for="category">Select Category:</label>
-            <select id="category" name="category">
-                <option value="">Choose Category</option>
-                <option value="surface">Surface Pump Type</option>
-                <option value="submersible">Submersible Pump Type</option>
-            </select>
+    <button id="selectPumpBtn">Select Pump</button>
 
-            <label for="subcategory">Select Subcategory:</label>
-            <select id="subcategory" name="subcategory">
-                <option value="">Choose Subcategory</option>
-                <option value="smart_direct">Smart Direct</option>
-                <option value="smart_battery">Smart Battery</option>
-            </select>
+    <div id="pumpModal" class="modal">
+        <div class="modal-content">
+            <div class="container">
+                <div class="main-content">
+                    <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <p>SunCulture Pump Selection Helper</p>
+                  </div>
+                    
+                    <label for="category">Category:</label>
+                    <select id="category" name="category">
+                        <option value="">Choose Category</option>
+                        <option value="surface">Surface Pump Type</option>
+                        <option value="submersible">Submersible Pump Type</option>
+                    </select>
 
-            <label for="head">Enter Pumping Head (m):</label>
-            <input type="number" id="head" name="head" required>
+                    <label for="subcategory">Subcategory:</label>
+                    <select id="subcategory" name="subcategory">
+                        <option value="">Choose Subcategory</option>
+                        <option value="smart_direct">Smart Direct</option>
+                        <option value="smart_battery">Smart Battery</option>
+                    </select>
 
-            <div class="section" id="bestPump">
-                <h2>Best Pump Suggestion</h2>
-                <div id="bestPumpResults">Please enter a head value to see the best pump suggestion.</div>
+                    <label for="head">Head (m):</label>
+                    <input placeholder="Type here ..." type="number" id="head" name="head" required>
+
+                    <div class="section" id="bestPump">
+                        <h2>Best Pump Suggestion</h2>
+                        <div id="bestPumpResults">Please enter a head value to see the best pump suggestion.</div>
+                    </div>
+
+                    <div class="section" id="option">
+                        <h2>An Option</h2>
+                        <div id="optionResults">Please enter a head value to see an option.</div>
+                    </div>
+                </div>
+                <div class="side-panel">
+                    <h2>Our Products</h2>
+                    <ul id="pumpList"></ul>
+                </div>
             </div>
-
-            <div class="section" id="option">
-                <h2>An Option</h2>
-                <div id="optionResults">Please enter a head value to see an option.</div>
-            </div>
-        </div>
-        <div class="side-panel">
-            <h2>Our Products</h2>
-            <ul id="pumpList"></ul>
         </div>
     </div>
 </body>

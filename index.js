@@ -108,6 +108,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // Get modal elements
+    const modal = document.getElementById("pumpModal");
+    const btn = document.getElementById("selectPumpBtn");
+    const closeBtn = document.querySelector(".close");
+
+    // Show modal when button is clicked
+    btn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Close modal when 'x' is clicked
+    closeBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
     // Tooltip 
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
@@ -136,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // If head is provided, rank the pumps and display results
         if (!isNaN(head)) {
             const suggestions = rankPumps(filteredPumps, head);
-            clearResults(); 
+            clearResults();
             displayResults(suggestions);
         } else {
             // If head is not provided, just filter the list but don't display results
-            clearResults(); 
+            clearResults();
         }
     }
 
@@ -158,13 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Display best pump
         if (suggestions.length > 0) {
-            const bestPump = suggestions[0]; 
+            const bestPump = suggestions[0];
             bestPumpResultsDiv.innerHTML = createPumpLink(bestPump);
         }
 
         // Display second best pump as an option
         if (suggestions.length > 1) {
-            const option = suggestions[1]; 
+            const option = suggestions[1];
             optionResultsDiv.innerHTML = createPumpLink(option);
         }
     }
