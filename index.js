@@ -187,20 +187,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (suggestions.length > 0) {
+            const head = parseFloat(headInput.value);
             const bestPump = suggestions[0];
-            bestPumpResultsDiv.innerHTML = createPumpLink(bestPump);
+            bestPumpResultsDiv.innerHTML = createPumpLink(bestPump, head);
         }
 
         if (suggestions.length > 1) {
+            const head = parseFloat(headInput.value);
             const option = suggestions[1];
-            optionResultsDiv.innerHTML = createPumpLink(option);
+            optionResultsDiv.innerHTML = createPumpLink(option, head);
         }
     }
 
     // Create pump link
-    function createPumpLink(pump) {
+    function createPumpLink(pump, head) {
         return `<a href="${pump.url}" target="_blank" class="pump-link">
-                    <strong>${pump.pump}</strong> with ${pump.controller}: Expected Flow Rate ${pump.flowRate.toFixed(2)} L/h
+                    ${pump.pump} with Flow Rate ${pump.flowRate.toFixed(2)} L/h at ${head} meters.
                 </a>`;
     }
 
