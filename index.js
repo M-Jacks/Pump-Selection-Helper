@@ -3,9 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const bestPumpResultsDiv = document.getElementById('bestPumpResults');
     const optionResultsDiv = document.getElementById('optionResults');
 
-    const categorySelect = document.getElementById('category');
-    const subcategorySelect = document.getElementById('subcategory');
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const subcategoryButtons = document.querySelectorAll('.subcategory-btn');
     const headInput = document.getElementById('head');
+
+    let selectedCategory = '';
+    let selectedSubcategory = '';
 
     const pumpDataLibrary = [
         {
@@ -108,7 +111,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Get modal elements
+    pumpDataLibrary.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.pump} - ${item.controller}`;
+        pumpList.appendChild(listItem);
+    });
+    
+    // Tooltip 
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('tooltip');
+    tooltip.innerText = 'View specs';
+    document.body.appendChild(tooltip);
+    
+    // Tooltip hover logic
+    document.addEventListener('mousemove', (e) => {
+        const pumpLinks = document.querySelectorAll('.pump-link');
+        pumpLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                tooltip.style.display = 'block';
+            });
+    
+            link.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+    
+        // Position tooltip near the mouse cursor
+        tooltip.style.left = `${e.pageX + 15}px`;
+        tooltip.style.top = `${e.pageY + 15}px`;
+    });
+    
     const modal = document.getElementById("pumpModal");
     const btn = document.getElementById("selectPumpBtn");
     const closeBtn = document.querySelector(".close");
@@ -118,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = "block";
     });
 
-    // Close modal when 'x' is clicked
+    // Close modal 
     closeBtn.addEventListener("click", function () {
         modal.style.display = "none";
     });
@@ -130,27 +162,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Tooltip 
-    const tooltip = document.createElement('div');
-    tooltip.classList.add('tooltip');
-    tooltip.innerText = 'View specs';
-    document.body.appendChild(tooltip);
-
-    pumpDataLibrary.forEach(item => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${item.pump} - ${item.controller}`;
-        pumpList.appendChild(listItem);
+    // category selection
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            toggleButton(button, categoryButtons);
+            selectedCategory = button.classList.contains('active') ? button.getAttribute('data-value') : '';
+            handleInputChange();
+        });
     });
 
-    // Initialize filter event listeners
-    headInput.addEventListener('input', handleInputChange);
-    categorySelect.addEventListener('change', handleInputChange);
-    subcategorySelect.addEventListener('change', handleInputChange);
+    // subcategory selection
+    subcategoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            toggleButton(button, subcategoryButtons);
+            selectedSubcategory = button.classList.contains('active') ? button.getAttribute('data-value') : '';
+            handleInputChange();
+        });
+    });
 
+    // Input event listener for the head input
+    headInput.addEventListener('input', handleInputChange);
+
+    // Handle input change
     function handleInputChange() {
         const head = parseFloat(headInput.value);
-        const selectedCategory = categorySelect.value;
-        const selectedSubcategory = subcategorySelect.value;
 
         // Filter based on category/subcategory
         const filteredPumps = filterPumpsByCategory(pumpDataLibrary, selectedCategory, selectedSubcategory);
@@ -161,16 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
             clearResults();
             displayResults(suggestions);
         } else {
-            // If head is not provided, just filter the list but don't display results
             clearResults();
         }
     }
 
+    // Clear previous results
     function clearResults() {
         bestPumpResultsDiv.innerHTML = 'Provide pumping head to get pump suggestion.';
         optionResultsDiv.innerHTML = '';
     }
 
+    // Display pump suggestions
     function displayResults(suggestions) {
         if (suggestions.length === 0) {
             bestPumpResultsDiv.innerHTML = '<p>No available suggestion.</p>';
@@ -178,39 +214,38 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Display best pump
         if (suggestions.length > 0) {
             const bestPump = suggestions[0];
             bestPumpResultsDiv.innerHTML = createPumpLink(bestPump);
         }
 
-        // Display second best pump as an option
         if (suggestions.length > 1) {
             const option = suggestions[1];
             optionResultsDiv.innerHTML = createPumpLink(option);
         }
     }
 
+    // Create pump link
     function createPumpLink(pump) {
         return `<a href="${pump.url}" target="_blank" class="pump-link">
                     <strong>${pump.pump}</strong> with ${pump.controller}: Expected Flow Rate ${pump.flowRate.toFixed(2)} L/h
                 </a>`;
     }
 
+    // Rank pumps based on flow rate for the given head
     function rankPumps(filteredData, head) {
         const performances = filteredData.map(entry => {
             const flowRate = interpolateFlowRate(entry.performance, head);
             return flowRate !== null ? { ...entry, flowRate } : null;
-        }).filter(entry => entry !== null); // Filter out pumps where flow rate couldn't be interpolated
+        }).filter(entry => entry !== null);
 
-        // Sort pumps by flow rate in descending order
         performances.sort((a, b) => b.flowRate - a.flowRate);
 
         return performances;
     }
 
+    // Filter pumps based on category and subcategory
     function filterPumpsByCategory(data, category, subcategory) {
-        // Filter pumps by category and subcategory if provided
         return data.filter(pump => {
             const categoryMatch = !category || pump.category === category;
             const subcategoryMatch = !subcategory || pump.subcategory === subcategory;
@@ -218,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Interpolate flow rate
     function interpolateFlowRate(performance, head) {
         const heads = Object.keys(performance).map(h => parseFloat(h)).sort((a, b) => a - b);
 
@@ -234,21 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    // Tooltip hover logic
-    document.addEventListener('mousemove', (e) => {
-        const pumpLinks = document.querySelectorAll('.pump-link');
-        pumpLinks.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                tooltip.style.display = 'block';
-            });
-
-            link.addEventListener('mouseleave', () => {
-                tooltip.style.display = 'none';
-            });
+    // Toggle button state (select/unselect)
+    function toggleButton(selectedButton, allButtons) {
+        allButtons.forEach(button => {
+            if (button === selectedButton) {
+                button.classList.toggle('active');
+            } else {
+                button.classList.remove('active');
+            }
         });
-
-        // Position the tooltip near the mouse cursor
-        tooltip.style.left = `${e.pageX + 15}px`;
-        tooltip.style.top = `${e.pageY + 15}px`;
-    });
+    }
 });

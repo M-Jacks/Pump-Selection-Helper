@@ -15,23 +15,22 @@
             <div class="container">
                 <div class="main-content">
                     <div class="modal-header">
-                    <span class="close">&times;</span>
-                    <p>SunCulture Pump Selection Helper</p>
-                  </div>
+                        <span class="close">&times;</span>
+                        <p>SunCulture Pump Selection Helper</p>
+                    </div>
                     
                     <label for="category">Category:</label>
-                    <select id="category" name="category">
-                        <option value="">Choose Category</option>
-                        <option value="surface">Surface Pump Type</option>
-                        <option value="submersible">Submersible Pump Type</option>
-                    </select>
+                    <div id="categoryButtons">
+                        <button class="category-btn" data-value="surface">Surface Pump Type</button>
+                        <button class="category-btn" data-value="submersible">Submersible Pump Type</button>
+                    </div>
+                    
 
                     <label for="subcategory">Subcategory:</label>
-                    <select id="subcategory" name="subcategory">
-                        <option value="">Choose Subcategory</option>
-                        <option value="smart_direct">Smart Direct</option>
-                        <option value="smart_battery">Smart Battery</option>
-                    </select>
+                    <div id="subcategoryButtons">
+                        <button class="subcategory-btn" data-value="smart_direct">Smart Direct</button>
+                        <button class="subcategory-btn" data-value="smart_battery">Smart Battery</button>
+                    </div>
 
                     <label for="head">Head (m):</label>
                     <input placeholder="Type here ..." type="number" id="head" name="head" required>

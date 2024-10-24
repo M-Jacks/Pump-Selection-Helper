@@ -16,6 +16,159 @@ body {
     min-height: 100vh;
 }
 
+.container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    flex-direction: column;
+    color: black;
+    align-items: center;
+}
+
+p {
+    text-align: center;
+    color: green;
+    font-size: 2.5em;
+    margin-bottom: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 3em;
+}
+h2{
+    color: #1abc9c;
+  
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-size: 1rem;
+    color: #34495e;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #74e7d09b;
+}
+
+input[type="number"]:focus, select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+
+#categoryButtons, #subcategoryButtons {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 20px; 
+}
+
+.category-btn, .subcategory-btn {
+    flex: 1; /* make buttons take equal width */
+    margin: 0 10px; /* Space around buttons */
+    padding: 10px;
+    color: rgba(0, 0, 0, 0.763);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background-color: #74e7d05b;
+}
+
+.subcategory-btn.active,
+.category-btn.active {
+    background: linear-gradient(270deg, cyan, green, yellow);
+    background-size: 400% 400%;
+    color: white;
+    animation: gradientShift 5s ease infinite; 
+}
+
+.subcategory-btn:hover,
+.category-btn:hover {
+    background-color: cyan;
+    color: white;
+}
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+ 
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    input[type="number"], select {
+        font-size: 0.9rem;
+    }
+
+    .pump-link {
+        font-size: 1rem;
+    }
+}
+
+
+/* Result Section */
+#results {
+    margin-top: 20px;
+}
+
+#bestPumpResults, #optionResults {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #bdc3c7;
+}
+
+.pump-link {
+    display: block;
+    font-size: 1.2rem;
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pump-link:hover {
+    text-decoration: underline;
+    color: #1abc9c;
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: none;
+    pointer-events: none;
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+.pump-link:hover + .tooltip {
+    display: block;
+}
+
+
 /* modal */
 .modal {
     display: none;
@@ -53,102 +206,8 @@ body {
     cursor: pointer;
 }
 
-/* Main Container */
-.container {
-    display: flex;
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-    flex-direction: column;
-    color: black;
-    align-items: center;
-}
 
-p {
-    text-align: center;
-    color: green;
-    font-size: 2.5em;
-    margin-bottom: 2px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 3em;
-}
-h2{
-    color: #1abc9c;
-  
-}
-
-/* Input Field, Dropdowns and Labels */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-label {
-    font-size: 1rem;
-    color: #34495e;
-}
-
-input[type="number"], select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #dfe6e9;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-    background-color: #74e7d09b;
-}
-
-input[type="number"]:focus, select:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-/* Result Section */
-#results {
-    margin-top: 20px;
-}
-
-#bestPumpResults, #optionResults {
-    background-color: #ecf0f1;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #bdc3c7;
-}
-
-.pump-link {
-    display: block;
-    font-size: 1.2rem;
-    color: #2980b9;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.pump-link:hover {
-    text-decoration: underline;
-    color: #1abc9c;
-}
-
-/* Tooltip Styles */
-.tooltip {
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    display: none;
-    pointer-events: none;
-    z-index: 1000;
-    white-space: nowrap;
-}
-
-.pump-link:hover + .tooltip {
-    display: block;
-}
-
-button {
+#selectPumpBtn {
     display: block;
     width: 250px;
     position: fixed;
@@ -168,7 +227,7 @@ button {
     border: none;
 }
 
-button:hover {
+#selectPumpBtn:hover {
     animation: gradientShift 20s ease infinite;
 }
 
@@ -216,8 +275,8 @@ button:hover {
 
 .tooltip {
     position: absolute;
-    background-color: #333;
-    color: #fff;
+    background-color: cyan;
+    color: black;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
