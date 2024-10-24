@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pumpDataLibrary.forEach(item => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${item.pump} - ${item.controller}`;
+        listItem.textContent = `${item.pump}`;
         pumpList.appendChild(listItem);
     });
 
