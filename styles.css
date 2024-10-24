@@ -28,7 +28,7 @@ body {
 
 p {
     text-align: center;
-    color: rgb(7, 252, 7);
+    color: #1abc9c;
     font-size: 2.5em;
     margin-bottom: 2px;
     font-family: Arial, Helvetica, sans-serif;
@@ -331,7 +331,7 @@ select {
     border: 1px solid grey;
 }
 h3 {
-    color: green;
+    color: #1abc9c;
     font-family: 'Courier New', Courier, monospace;
 }
 .conversion-section label {
