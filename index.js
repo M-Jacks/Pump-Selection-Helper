@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             clearResults();
         }
-    }
+    } 
 
     // Clear previous results
     function clearResults() {
