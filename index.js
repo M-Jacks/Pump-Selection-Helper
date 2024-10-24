@@ -25,34 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 "21": 0.0
             },
             "url": "https://sunculture.io/surfacepump/"
-        }, {
-            "pump": "Surface Pump",
-            "controller": "FAlcon",
-            "category": "surface",
-            "subcategory": "smart_direct",
-            "performance": {
-                "1": 2968.46,
-                "5": 2782.07,
-                "10": 1689.35,
-                "15": 809.31,
-                "20": 101.03,
-                "21": 0.0
-            },
-            "url": "https://sunculture.io/surfacepump/"
-        }, {
-            "pump": "RM2C-MAX Pump",
-            "controller": "CSD GD32",
-            "category": "submersible",
-            "subcategory": "smart_direct",
-            "performance": {
-                "1": 2968.46,
-                "5": 2782.07,
-                "10": 1689.35,
-                "15": 809.31,
-                "20": 101.03,
-                "21": 0.0
-            },
-            "url": "https://sunculture.io/surfacepump/"
         },
         {
             "pump": "RainMaker2C Kubwa",
@@ -116,13 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
         listItem.textContent = `${item.pump} - ${item.controller}`;
         pumpList.appendChild(listItem);
     });
-    
+
     // Tooltip 
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
     tooltip.innerText = 'View specs';
     document.body.appendChild(tooltip);
-    
+
     // Tooltip hover logic
     document.addEventListener('mousemove', (e) => {
         const pumpLinks = document.querySelectorAll('.pump-link');
@@ -130,17 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
             link.addEventListener('mouseenter', () => {
                 tooltip.style.display = 'block';
             });
-    
+
             link.addEventListener('mouseleave', () => {
                 tooltip.style.display = 'none';
             });
         });
-    
+
         // Position tooltip near the mouse cursor
         tooltip.style.left = `${e.pageX + 15}px`;
         tooltip.style.top = `${e.pageY + 15}px`;
     });
-    
+
     const modal = document.getElementById("pumpModal");
     const btn = document.getElementById("selectPumpBtn");
     const closeBtn = document.querySelector(".close");

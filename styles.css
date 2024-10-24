@@ -28,7 +28,7 @@ body {
 
 p {
     text-align: center;
-    color: green;
+    color: rgb(7, 252, 7);
     font-size: 2.5em;
     margin-bottom: 2px;
     font-family: Arial, Helvetica, sans-serif;
@@ -57,7 +57,7 @@ input[type="number"], select {
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s;
-    background-color: #74e7d09b;
+    background-color: #74e7d014;
 }
 
 input[type="number"]:focus, select:focus {
@@ -81,12 +81,12 @@ input[type="number"]:focus, select:focus {
     border-radius: 8px;
     font-size: 1.1rem;
     cursor: pointer;
-    background-color: #74e7d05b;
+    background-color: #74e7d014;
 }
 
 .subcategory-btn.active,
 .category-btn.active {
-    background: linear-gradient(270deg, cyan, green, yellow);
+    background: linear-gradient(270deg, rgba(0, 255, 255, 0.497), rgba(0, 128, 0, 0.491), rgba(255, 255, 0, 0.491));
     background-size: 400% 400%;
     color: white;
     animation: gradientShift 5s ease infinite; 
@@ -130,7 +130,7 @@ input[type="number"]:focus, select:focus {
 }
 
 #bestPumpResults, #optionResults {
-    background-color: #ecf0f1;
+    background-color: #74e7d014;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -302,4 +302,39 @@ select {
     margin-bottom: 10px;
     border: 1px solid #c0bcbc;
     border-radius: 4px;
+}
+
+/* Length conversion */
+.conversion-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    background-color: #74e7d014;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.conversion-section div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conversion-section input {
+    width: 80%;
+    padding: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+h3 {
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+}
+.conversion-section label {
+    font-size: 1rem;
+    margin-bottom: 10px;
 }
