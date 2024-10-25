@@ -19,9 +19,19 @@
                         <p>SunCulture Pump Selection Helper</p>
                     </div>
 
-                    <label for="head">Head (meters):</label>
-                    <input placeholder="Type here ..." type="number" id="head" name="head" required>
-
+                    <div class="conversion-section">
+                        <h3>Pumping Head</h3>
+                        <div class="conversion-input">
+                            <label for="feetInput">in feet</label>
+                            <input placeholder="Enter feet" type="number" id="feetInput">
+                        </div>
+                        <h3>Or</h3>
+                        <div class="conversion-input">
+                            <label for="metersInput">in meters</label>
+                            <input placeholder="Enter meters" type="number" id="metersInput">
+                        </div>
+                    </div>
+                    
                     <label for="category">Category:</label>
                     <div id="categoryButtons">
                         <button class="category-btn" data-value="surface">Surface Pump Type</button>
@@ -44,17 +54,7 @@
                         <div id="optionResults">Please enter a head value to see an option.</div>
                     </div>
 
-                    <div class="conversion-section">
-                        <h3>Length Conversion</h3>
-                        <div>
-                            <label for="feetInput">Feet:</label>
-                            <input placeholder="Enter feet" type="number" id="feetInput">
-                        </div>
-                        <div>
-                            <label for="metersInput">Meters:</label>
-                            <input placeholder="Enter meters" type="number" id="metersInput">
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="side-panel">
                     <h2>Our Products</h2>

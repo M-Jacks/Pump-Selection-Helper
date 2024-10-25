@@ -34,6 +34,10 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 3em;
 }
+
+#feetInput {
+font-size: 0/8em;
+}
 h2{
     color: #1abc9c;
   
@@ -73,7 +77,7 @@ input[type="number"]:focus, select:focus {
 }
 
 .category-btn, .subcategory-btn {
-    flex: 1; /* make buttons take equal width */
+    flex: 1; /* buttons take equal width */
     margin: 0 10px; /* Space around buttons */
     padding: 10px;
     color: rgba(0, 0, 0, 0.763);
@@ -81,7 +85,7 @@ input[type="number"]:focus, select:focus {
     border-radius: 8px;
     font-size: 1.1rem;
     cursor: pointer;
-    background-color: #74e7d014;
+    background-color: #74e7d048;
 }
 
 .subcategory-btn.active,
@@ -148,20 +152,6 @@ input[type="number"]:focus, select:focus {
 .pump-link:hover {
     text-decoration: underline;
     color: #1abc9c;
-}
-
-/* Tooltip Styles */
-.tooltip {
-    position: absolute;
-    background-color: #333;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    display: none;
-    pointer-events: none;
-    z-index: 1000;
-    white-space: nowrap;
 }
 
 .pump-link:hover + .tooltip {
@@ -285,17 +275,6 @@ input[type="number"]:focus, select:focus {
     z-index: 1000;
 }
 
-.pump-link {
-    text-decoration: none;
-    color: #16a084;
-    cursor: pointer;
-}
-
-.pump-link:hover {
-    /* text-decoration: underline; */
-    color: #16a085;
-}
-
 select {
     width: 100%;
     padding: 8px;
@@ -307,34 +286,41 @@ select {
 /* Length conversion */
 .conversion-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 20px 0;
     background-color: #74e7d014;
-    padding: 10px;
+    padding: 15px 10px;
     border-radius: 5px;
+    gap: 20px; /* Space between sections */
 }
 
-.conversion-section div {
-    flex: 1;
+.conversion-section h3 {
+    color: #1abc9c;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0 10px;
+}
+
+.conversion-input {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.conversion-section input {
-    width: 80%;
-    padding: 10px;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.conversion-input label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.conversion-input input {
+    width: 100px;
+    padding: 8px;
+    font-size: 1rem;
     border-radius: 5px;
     border: 1px solid grey;
+    text-align: center;
 }
-h3 {
-    color: #1abc9c;
-    font-family: 'Courier New', Courier, monospace;
-}
-.conversion-section label {
-    font-size: 1rem;
-    margin-bottom: 10px;
+.conversion-input input::placeholder {
+    font-size: 0.7rem; 
+    color: #888; 
 }

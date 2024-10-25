@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const categoryButtons = document.querySelectorAll('.category-btn');
     const subcategoryButtons = document.querySelectorAll('.subcategory-btn');
-    const headInput = document.getElementById('head');
+    const headInput = document.getElementById('metersInput');
+    const feetInput = document.getElementById('feetInput');
 
     let selectedCategory = '';
     let selectedSubcategory = '';
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "category": "surface",
             "subcategory": "smart_direct",
             "performance": {
-                "1": 2968.46,
+                "0": 2968.46,
                 "5": 2782.07,
                 "10": 1689.35,
                 "15": 809.31,
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "category": "surface",
             "subcategory": "smart_direct",
             "performance": {
-                "1": 2998.13,
+                "0": 2998.13,
                 "5": 2405.21,
                 "10": 2160.54,
                 "15": 1474.35,
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "category": "submersible",
             "subcategory": "smart_direct",
             "performance": {
-                "1": 1256.33,
+                "0": 1256.33,
                 "10": 1101.34,
                 "20": 937.68,
                 "30": 791.82,
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "category": "submersible",
             "subcategory": "smart_battery",
             "performance": {
-                "1": 1110,
+                "0": 1110,
                 "5": 990,
                 "10": 852,
                 "15": 744,
@@ -151,9 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
             handleInputChange();
         });
     });
-
+    
     // Input event listener for the head input
     headInput.addEventListener('input', handleInputChange);
+    feetInput.addEventListener('input', handleInputChange);
 
     // Handle input change
     function handleInputChange() {
