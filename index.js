@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tooltip 
     const tooltip = document.createElement('div');
     tooltip.classList.add('tooltip');
-    tooltip.innerText = 'View specs';
+    tooltip.innerText = 'Click to see specs';
     document.body.appendChild(tooltip);
 
-    // Tooltip hover logic
+    // Tooltip hover 
     document.addEventListener('mousemove', (e) => {
         const pumpLinks = document.querySelectorAll('.pump-link');
         pumpLinks.forEach(link => {
@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // subcategory selection
     subcategoryButtons.forEach(button => {
         button.addEventListener('click', () => {
             toggleButton(button, subcategoryButtons);
@@ -153,11 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Input event listener for the head input
     headInput.addEventListener('input', handleInputChange);
     feetInput.addEventListener('input', handleInputChange);
 
-    // Handle input change
+    // input change
     function handleInputChange() {
         const head = parseFloat(headInput.value);
 
