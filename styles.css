@@ -191,8 +191,8 @@ input[type="number"]:focus, select:focus {
     }
 
     .modal-close {
-        font-size: 1.2rem; 
-    }
+        font-size: 1.2rem;      
+    } 
 }
 
 /* Close Button */
@@ -321,7 +321,7 @@ select {
 
 .conversion-input label {
     font-size: 1rem;
-    margin-bottom: 5px;
+    margin: auto;
 }
 
 .conversion-input input {
